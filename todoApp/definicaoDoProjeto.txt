@@ -1,0 +1,26 @@
+Descrição do projeto TodoApp
+
+Entidades 
+	Projetos
+	Tarefas
+
+Caracteristicas dos projetos
+	*Id
+	*Nome
+	*Descrição
+	*Data de criação
+	*Data de atualização
+
+Caracteristicas das tarefas
+
+	*Id
+	*Id do projeto
+	*Nome
+	*Descrição
+	*Completada
+	*Notas
+	*Prazo
+	*Criada em 
+	*Atualizada em
+*
+
