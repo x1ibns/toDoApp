@@ -20,9 +20,9 @@ import util.ConnectionFactory;
 public class ProjectController {
     public static void save(Project project) throws SQLException {
         String sql = "INSERT INTO projects (name ,"
-                + "description"
-                + "createdAt"
-                + "updatedA) VALUES (?,?,?,?)";
+                + "description ,"
+                + "dateCreatedAt , "
+                + "dateUpdatedAt) VALUES (?,?,?,?)";
         
          //Estabelecendo a conexão com o banco de dados        
         Connection conn = null ;
@@ -38,6 +38,7 @@ public class ProjectController {
             statement.setDate(4, new Date(project.getDateUpdatedAt().getTime()));
             
             statement.execute();
+            System.out.println("Projeto salvocom sucesso !  ");
         } catch (SQLException e) {
             
             throw new SQLException("Erro ao salvar os dados do projeto",e);
@@ -45,6 +46,7 @@ public class ProjectController {
         } finally {
             
             ConnectionFactory.closeConnection(conn, statement);
+            System.out.println("Fechando conexão com o banco de dados ! ...");
         }
         
     }
@@ -53,8 +55,8 @@ public class ProjectController {
         String sql = "UPDATE FROM projects SET ("
                 + "name = ? ,"
                 + "description = ? ,"
-                + "createdAt = ? ,"
-                + "updatedAt = ?)"
+                + "dateCreatedAt = ? ,"
+                + "dateUpdatedAt = ?)"
                 + "WHERE id = ?";
         
          //Estabelecendo a conexão com o banco de dados        
@@ -71,7 +73,8 @@ public class ProjectController {
             statement.setInt(5, project.getId());
             
             statement.execute();
-
+             System.out.println("Projeto atualizado com sucesso !  ");
+             
         } catch (Exception e) {
 
             throw new RuntimeException("Erro ao atualizar os dados ",e);
@@ -79,6 +82,7 @@ public class ProjectController {
         } finally {
             
             ConnectionFactory.closeConnection(conn, statement);
+            System.out.println("Fechando conexão com o banco de dados ! ...");
         }
     }
     public static void deleteById(int  projectId) {
@@ -94,6 +98,7 @@ public class ProjectController {
             statement = conn.prepareStatement(sql);
             statement.setInt(1, projectId);
             statement.execute();
+            System.out.println("Projeto deletado com sucesso !  ");
                     
         } catch (Exception e) {
             
@@ -102,7 +107,7 @@ public class ProjectController {
         } finally {
             
             ConnectionFactory.closeConnection(conn, statement);
-            
+            System.out.println("Fechando conexão com o banco de dados ! ...");
         }
     }
     public static List<Project> list() {
@@ -144,7 +149,7 @@ public class ProjectController {
         } finally {
             
             ConnectionFactory.closeConnection(conn, statement, resultado);
-            
+            System.out.println("Fechando conexão com o banco de dados ! ...");
         }
          System.out.println("Lista de projetos criada e carregada do banco de dados : ");
         

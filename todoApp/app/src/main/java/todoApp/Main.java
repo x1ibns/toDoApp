@@ -5,14 +5,29 @@ package todoApp;
 
 import util.ConnectionFactory;
 import java.sql.Connection;
+import model.Project;
+import controller.ProjectController;
+import java.sql.SQLException;
+import java.util.Date;
 
 public class Main {
    
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
        
-        System.out.println("hello");
-        //Connection c = ConnectionFactory.getConnection();
-        //ConnectionFactory.closeConnection(c);
-       
+        //System.out.println("hello");
+        
+        Project projeto = new Project();
+        ProjectController controlador = new ProjectController();
+        
+        projeto.setName("correr");        
+        projeto.setDescription("correr na quadra");
+        Date data  = new Date();
+        
+        projeto.setDateCreatedAt(data);
+        projeto.setDateUpdatedAt(data);
+        //controlador.save(projeto);
+        //controlador.deleteById(2);
+          
+              
     }
 }

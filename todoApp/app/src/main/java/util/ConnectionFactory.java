@@ -17,9 +17,9 @@ import java.sql.ResultSet;
  */
 public class ConnectionFactory {
     public static final String DRIVER = "com.mysql.jdbc.Driver" ;
-    public static final String URL = "jdbc:mysql://192.168.1.102:3306/todoApp" ;
-    public static final String USER= "ROOT" ;
-    public static final String PASS = "" ;
+    public static final String URL = "jdbc:mysql://127.0.0.1:3306/todoApp" ;
+    public static final String USER= "victor" ;
+    public static final String PASS = "1234";
     
     public static Connection getConnection(){
         try{
