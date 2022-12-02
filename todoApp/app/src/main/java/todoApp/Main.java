@@ -9,8 +9,8 @@ import java.sql.Connection;
 public class Main {
    
     public static void main(String[] args) {
-        /*Connection c = ConnectionFactory.getConnection();
-        ConnectionFactory.closeConnection(c);*/
+        Connection c = ConnectionFactory.getConnection();
+        ConnectionFactory.closeConnection(c);
         System.out.println("hello");
     }
 }

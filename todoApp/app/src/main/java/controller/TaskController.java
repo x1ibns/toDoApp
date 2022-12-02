@@ -13,6 +13,7 @@ import model.Task;
 import util.ConnectionFactory;
 
 
+
 /**
  *
  * @author ADM
@@ -43,6 +44,8 @@ public class TaskController {
             statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
             statement.execute();
             
+            ConnectionFactory.closeConnection(conn, statement);
+            
         } catch (SQLException e) {
             throw new SQLException("Erro ao inserir os dados ");
         }
@@ -60,6 +63,8 @@ public class TaskController {
             statement = conn.prepareStatement(sql);
             statement.setInt(1,taskId);
             statement.execute();
+            
+            ConnectionFactory.closeConnection(conn, statement);
             
         } catch (SQLException e) {
             throw new SQLException("Erro ao deletar a tarefa ");
