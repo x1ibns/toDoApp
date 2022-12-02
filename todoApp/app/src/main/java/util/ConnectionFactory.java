@@ -4,6 +4,7 @@ package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -47,6 +48,24 @@ public class ConnectionFactory {
             }
             if(statement != null){
                 statement.close();
+            }
+        }
+        catch(Exception ex){
+            throw new RuntimeException("Erro no fechar a conexão com o banco de dados ");
+        }
+    }
+    
+     public static void closeConnection(Connection connection , PreparedStatement statement , ResultSet resultado){
+        try{
+            if(connection != null){
+                connection.close();
+            }
+            if(statement != null){
+                statement.close();
+            }
+            
+            if (resultado != null){
+                resultado = null ;
             }
         }
         catch(Exception ex){

@@ -16,5 +16,17 @@ import util.ConnectionFactory;
  * @author ADM
  */
 public class ProjectController {
+    public static void save(Project project) {
+        
+    }
+    public static void update(Project project) {
+        
+    }
+    public static void delete(Project project) {
+        
+    }
+    public static void list(Project project) {
+        
+    }
     
 }
