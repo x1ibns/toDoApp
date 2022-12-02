@@ -40,7 +40,7 @@ public class ProjectController {
             statement.execute();
         } catch (SQLException e) {
             
-            throw new SQLException("Erro ao inserir os dados",e);
+            throw new SQLException("Erro ao salvar os dados do projeto",e);
         
         } finally {
             
@@ -68,6 +68,7 @@ public class ProjectController {
             statement.setString(2 , project.getDescription());
             statement.setDate(3, new Date(project.getDateCreatedAt().getTime()));
             statement.setDate(4, new Date(project.getDateUpdatedAt().getTime()));
+            statement.setInt(5, project.getId());
             
             statement.execute();
 
@@ -80,7 +81,7 @@ public class ProjectController {
             ConnectionFactory.closeConnection(conn, statement);
         }
     }
-    public static void deleteById(Project project) {
+    public static void deleteById(int  projectId) {
         String sql = "DELETE FROM projects WHERE id = ?";
         
          //Estabelecendo a conexão com o banco de dados        
@@ -91,7 +92,7 @@ public class ProjectController {
         try {
             conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
-            statement.setInt(1, project.getId());
+            statement.setInt(1, projectId);
             statement.execute();
                     
         } catch (Exception e) {
@@ -104,7 +105,7 @@ public class ProjectController {
             
         }
     }
-    public static List<Project> list(int projectId) {
+    public static List<Project> list() {
         
         String sql = "SELECT * FROM projects";
         //Estabelecendo a conexão com o banco de dados        
@@ -121,7 +122,7 @@ public class ProjectController {
             
             conn = ConnectionFactory.getConnection();            
             statement = conn.prepareStatement(sql);
-            statement.setInt(1, projectId);
+           
                  
             resultado =  statement.executeQuery();
             
