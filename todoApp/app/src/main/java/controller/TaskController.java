@@ -30,7 +30,10 @@ public class TaskController {
                 + "deadline,"
                 + "createdAt,"
                 + "updatedAt) VALUES (?,?,?,?,?,?,?,?) ";
-        Connection conn = null;
+        
+        //Estabelecendo a conexão com o banco de dados        
+        Connection conn = null ;
+        //Preparando a query
         PreparedStatement statement = null;
         
         try {
@@ -53,18 +56,21 @@ public class TaskController {
         }
     }
     public void update(Task task){
+        
         String sql = "UPDATE FROM tasks SET "
-                + "idProject = ?,"
-                + "name = ?" 
-                + "descrition = ?"
-                + "notes = ?"
-                + "completed = ?"
-                + "deadline = ?"
-                + "createdAt = ?"
-                + "updatedAt = ?"
+                + "idProject = ? ,"
+                + "name = ? ," 
+                + "descrition = ? ,"
+                + "notes = ? ,"
+                + "completed = ? ,"
+                + "deadline = ? ,"
+                + "createdAt = ? ,"
+                + "updatedAt = ? ,"
                 + "WHERE id = ? " ;
         
+        //Estabelecendo a conexão com o banco de dados        
         Connection conn = null ;
+        //Preparando a query
         PreparedStatement statement = null;
         
         try {
@@ -75,25 +81,32 @@ public class TaskController {
             statement.setString(3,task.getDescription());
             statement.setInt(4,task.getNotes());
             statement.setBoolean(5, task.isCompleted());
-            statement.setDate(7, new Date(task.getDeadline().getTime()));
-            statement.setDate(8, new Date(task.getCreatedAt().getTime()));
-            statement.setDate( 9, new Date(task.getUpdatedAt().getTime()));
-            statement.setInt(1, task.getId());
+            statement.setDate(6, new Date(task.getDeadline().getTime()));
+            statement.setDate(7, new Date(task.getCreatedAt().getTime()));
+            statement.setDate( 8, new Date(task.getUpdatedAt().getTime()));
+            statement.setInt(9, task.getId());
             
             statement.execute();
             
             
         } catch (Exception e) {
+            
             throw new RuntimeException("Erro  ao atualizar os dados ");
+            
         } finally{
+            
             ConnectionFactory.closeConnection(conn, statement);
+     
         }
-                
-                
+                               
   }
     public void removeById(int taskId) throws SQLException{
+    
         String sql ="DELETE FROM tasks WHERE id = ? ";
-        Connection conn = null;
+        
+        //Estabelecendo a conexão com o banco de dados        
+        Connection conn = null ;
+        //Preparando a query
         PreparedStatement statement = null;
         
         try {
@@ -101,21 +114,29 @@ public class TaskController {
             statement = conn.prepareStatement(sql);
             statement.setInt(1,taskId);
             statement.execute();
-            
-            ConnectionFactory.closeConnection(conn, statement);
+                
             
         } catch (Exception e) {
+            
             throw new RuntimeException("Erro ao deletar a tarefa ");
+        
         } finally{
+        
+            //Fechando a conexão com banco e a query
             ConnectionFactory.closeConnection(conn,statement);
+        
         }
     }
     public List <Task> getAll(int idProject){
         
         String sql = "SELECT * FROM tasks WHERE idProject";
         
-        Connection conn = null;
-        PreparedStatement statement = null ;
+        //Estabelecendo a conexão com o banco de dados        
+        Connection conn = null ;
+        //Preparando a query
+        PreparedStatement statement = null;
+        
+        //Criando uma variavel para armazenar o resultado da busca no banco
         ResultSet resultado = null;
         
         //lista de tarefas que será devolvida quando for chamado o método getAll
@@ -150,11 +171,13 @@ public class TaskController {
             throw new RuntimeException("Erro ao buscar dados no banco de dados ");
             
         } finally {
+            
             ConnectionFactory.closeConnection(conn, statement, resultado);
         }
         
         System.out.println("Lista de tarefas criada e carregada do banco de dados : ");
         
+        //lista de tarefas devolvida quando for chamado o método getAll
         return tasks;
         
     }
