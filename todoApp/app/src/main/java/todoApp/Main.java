@@ -14,7 +14,7 @@ public class Main {
    
     public static void main(String[] args) throws SQLException {
        
-        //System.out.println("hello");
+        
         
         Project projeto = new Project();
         ProjectController controlador = new ProjectController();
@@ -25,8 +25,7 @@ public class Main {
         
         projeto.setDateCreatedAt(data);
         projeto.setDateUpdatedAt(data);
-        //controlador.save(projeto);
-        //controlador.deleteById(2);
+        
           
               
     }
