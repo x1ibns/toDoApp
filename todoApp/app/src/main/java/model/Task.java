@@ -18,12 +18,24 @@ public class Task {
     private String name;
     private String description;
     private boolean completed;
-    private int notes;
+    private String notes;
     private Date deadline;
     private Date createdAt;
     private Date updatedAt;
 
-    public Task(int id, int idProject, String name, String description, boolean completed, int notes, Date deadline, Date createdAt, Date updatedAt) {
+    /**
+     *
+     * @param id
+     * @param idProject
+     * @param name
+     * @param description
+     * @param completed
+     * @param notes
+     * @param deadline
+     * @param createdAt
+     * @param updatedAt
+     */
+    public Task(int id, int idProject, String name, String description, boolean completed, String notes, Date deadline, Date createdAt, Date updatedAt) {
         this.id = id;
         this.idProject = idProject;
         this.name = name;
@@ -36,6 +48,7 @@ public class Task {
     }
     public Task(){
         this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
 
     public int getId() {
@@ -78,11 +91,11 @@ public class Task {
         this.completed = completed;
     }
 
-    public int getNotes() {
+    public String getNotes() {
         return notes;
     }
 
-    public void setNotes(int notes) {
+    public void setNotes(String notes) {
         this.notes = notes;
     }
 

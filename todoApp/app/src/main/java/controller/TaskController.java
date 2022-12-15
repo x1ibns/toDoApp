@@ -24,7 +24,7 @@ public class TaskController {
     public void save(Task task) throws SQLException{
         String sql = "INSERT INTO tasks (idProject,"
                 + "name,"
-                + "descrition,"
+                + "description,"
                 + "completed,"
                 + "notes,"
                 + "deadline,"
@@ -39,18 +39,22 @@ public class TaskController {
         try {
             conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
+            
             statement.setInt(1, task.getIdProject());
             statement.setString(2, task.getName());
             statement.setString(3, task.getDescription());
             statement.setBoolean(4, task.isCompleted());
-            statement.setInt(5,task.getNotes());
+            statement.setString(5,task.getNotes());
             statement.setDate(6, new Date(task.getDeadline().getTime()));
             statement.setDate(7, new Date(task.getCreatedAt().getTime()));
             statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
             statement.execute();
             
-        } catch (SQLException e) {
-            throw new SQLException("Erro ao inserir os dados ");
+        } catch (Exception e) {
+           
+            throw new RuntimeException("Erro ao inserir os "
+                    + "dados "+e.getMessage() ,e);
+         
         } finally{
              ConnectionFactory.closeConnection(conn, statement);
         }
@@ -79,7 +83,7 @@ public class TaskController {
             statement.setInt(1,task.getIdProject());
             statement.setString(2, task.getName());
             statement.setString(3,task.getDescription());
-            statement.setInt(4,task.getNotes());
+            statement.setString(4,task.getNotes());
             statement.setBoolean(5, task.isCompleted());
             statement.setDate(6, new Date(task.getDeadline().getTime()));
             statement.setDate(7, new Date(task.getCreatedAt().getTime()));
@@ -145,7 +149,7 @@ public class TaskController {
         try {
             conn = ConnectionFactory.getConnection();
             statement = conn.prepareStatement(sql);
-            statement.setInt(1, idProject);
+            statement.setInt(1 , idProject);
             
             resultado = statement.executeQuery();
             
@@ -156,7 +160,7 @@ public class TaskController {
                 task.setIdProject(resultado.getInt("idProject"));
                 task.setName(resultado.getString("name"));
                 task.setDescription(resultado.getString("description"));
-                task.setNotes(resultado.getInt("notes"));
+                task.setNotes(resultado.getString("notes"));
                 task.setCompleted(resultado.getBoolean("completed"));
                 task.setDeadline(resultado.getDate("deadline"));
                 task.setCreatedAt(resultado.getDate("createAt"));

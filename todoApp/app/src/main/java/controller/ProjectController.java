@@ -38,7 +38,7 @@ public class ProjectController {
             statement.setDate(4, new Date(project.getDateUpdatedAt().getTime()));
             
             statement.execute();
-            System.out.println("Projeto salvocom sucesso !  ");
+            System.out.println("Projeto salvo com sucesso !  ");
         } catch (SQLException e) {
             
             throw new SQLException("Erro ao salvar os dados do projeto",e);
@@ -136,8 +136,8 @@ public class ProjectController {
                 Project project = new Project();
                 project.setId(resultado.getInt("id"));
                 project.setDescription(resultado.getString("description"));
-                project.setDateCreatedAt(resultado.getDate("createdAt"));
-                project.setDateUpdatedAt(resultado.getDate("updatedAt"));
+                project.setDateCreatedAt(resultado.getDate("dateCreatedAt"));
+                project.setDateUpdatedAt(resultado.getDate("dateUpdatedAt"));
                
                 projects.add(project);
             }

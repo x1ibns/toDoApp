@@ -27,6 +27,8 @@ public class Project {
 
     public Project() {
         this.dateCreatedAt = new Date();
+        this.dateUpdatedAt = new Date();
+        
     }
     
 
@@ -72,8 +74,9 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" + "id=" + id + ", name=" + name + ", description=" + description + ", dateCreatedAt=" + dateCreatedAt + ", dateUpdatedAt=" + dateUpdatedAt + '}';
+        return this.name ; 
     }
+                
     
     
     
