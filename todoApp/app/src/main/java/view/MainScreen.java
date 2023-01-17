@@ -8,6 +8,8 @@ import controller.ProjectController;
 import controller.TaskController;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Project;
@@ -19,13 +21,13 @@ import model.Project;
 public class MainScreen extends javax.swing.JFrame {
     ProjectController projectController;
     TaskController taskController;
-     DefaultListModel projectModel ;
+    DefaultListModel projectModel ;
     
     public MainScreen() {
         initComponents();
-        decorateTableTasks();
+        decorateTableTasks();       
         initDataController();
-        initComponetsModel();
+        initComponentsModel();
         
     }
 
@@ -166,8 +168,8 @@ public class MainScreen extends javax.swing.JFrame {
         jPanelProjects.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         listOfProjects.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        listOfProjects.setModel(listOfProjects.getModel());
         listOfProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listOfProjects.setCellRenderer(null);
         jScrollPane1.setViewportView(listOfProjects);
 
         javax.swing.GroupLayout jPanelProjectsLayout = new javax.swing.GroupLayout(jPanelProjects);
@@ -278,8 +280,46 @@ public class MainScreen extends javax.swing.JFrame {
         
         
         projectJDialogScreen.setVisible(true);
+        projectJDialogScreen.addWindowListener (new WindowListener(){
+            @Override
+            public void windowOpened(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                loadProjects();
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
         
-        
+        } );
+       
+           
     }//GEN-LAST:event_addProjectsMouseClicked
 
     private void addTasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addTasksMouseClicked
@@ -362,21 +402,26 @@ public class MainScreen extends javax.swing.JFrame {
          projectController = new ProjectController();
          taskController = new TaskController();
     }
-    public void initComponetsModel(){
+    public void initComponentsModel(){
     
-       projectModel = new DefaultListModel <Project>();
-      loadProjects();
+        projectModel = new DefaultListModel ();
+        
+        loadProjects();
     }
     
     public void loadProjects(){
-        List<Project> projects = projectController.list();
-        projectModel.clear();
+        List<Project> listProjects;
+        listProjects = projectController.list();
         
-        for (int i = 0 ; i < projects.size() ; i++){
-            Project project = projects.get(i);
-            projectModel.addElement(projects);       
+        projectModel.clear();               
+        Project project;
+        for (int i = 0 ; i < listProjects.size() ; i++){
+            
+            project = listProjects.get(i);
+            projectModel.addElement(project);       
         }
-       listOfProjects.setModel(projectModel);
+        listOfProjects.setModel(projectModel);
+       
     }
 
     

@@ -135,11 +135,13 @@ public class ProjectController {
                 
                 Project project = new Project();
                 project.setId(resultado.getInt("id"));
+                project.setName(resultado.getString("name"));
                 project.setDescription(resultado.getString("description"));
                 project.setDateCreatedAt(resultado.getDate("dateCreatedAt"));
                 project.setDateUpdatedAt(resultado.getDate("dateUpdatedAt"));
                
                 projects.add(project);
+                
             }
             
         } catch (Exception e) {
@@ -149,9 +151,9 @@ public class ProjectController {
         } finally {
             
             ConnectionFactory.closeConnection(conn, statement, resultado);
-            System.out.println("Fechando conexão com o banco de dados ! ...");
+            //System.out.println("Fechando conexão com o banco de dados ! ...");
         }
-         System.out.println("Lista de projetos criada e carregada do banco de dados : ");
+         System.out.println(""+ projects);
         
         //lista de tarefas devolvida quando for chamado o método getAll
         return projects;
